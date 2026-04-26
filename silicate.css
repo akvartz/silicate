@@ -1,0 +1,245 @@
+/*
+ * silicate — a minimalist design system.
+ * Style raw HTML. Reach for a class only when semantics fall short.
+ *
+ * Inspired by:
+ *   https://motherfuckingwebsite.com/
+ *   http://bettermotherfuckingwebsite.com/
+ *   https://thebestmotherfucking.website/
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* Type */
+  --silicate-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --silicate-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas,
+    "Liberation Mono", monospace;
+  --silicate-font-size: 1.125rem;
+  --silicate-line-height: 1.6;
+  --silicate-measure: 38rem;
+
+  /* Space (geometric, ~1.5x) */
+  --silicate-space-1: 0.25rem;
+  --silicate-space-2: 0.5rem;
+  --silicate-space-3: 0.75rem;
+  --silicate-space-4: 1rem;
+  --silicate-space-5: 1.5rem;
+  --silicate-space-6: 2.25rem;
+  --silicate-space-7: 3.5rem;
+
+  /* Color — light */
+  --silicate-fg: #1a1a1a;
+  --silicate-bg: #fafaf7;
+  --silicate-muted: #666;
+  --silicate-rule: #ddd;
+  --silicate-accent: #0a66c2;
+  --silicate-accent-visited: #6b3fa0;
+  --silicate-surface: #f0f0eb;
+  --silicate-selection: #ffec99;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --silicate-fg: #e8e8e6;
+    --silicate-bg: #111;
+    --silicate-muted: #999;
+    --silicate-rule: #333;
+    --silicate-accent: #6cb6ff;
+    --silicate-accent-visited: #c9a3ff;
+    --silicate-surface: #1c1c1c;
+    --silicate-selection: #5a4d1f;
+  }
+}
+
+/* Reset (the bare minimum) */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0 auto;
+  padding: var(--silicate-space-6) var(--silicate-space-4);
+  max-width: var(--silicate-measure);
+  font-family: var(--silicate-font-sans);
+  font-size: var(--silicate-font-size);
+  line-height: var(--silicate-line-height);
+  color: var(--silicate-fg);
+  background: var(--silicate-bg);
+  text-rendering: optimizeLegibility;
+}
+
+::selection { background: var(--silicate-selection); color: var(--silicate-fg); }
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  margin: var(--silicate-space-6) 0 var(--silicate-space-3);
+  line-height: 1.25;
+  font-weight: 600;
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.125rem; }
+h5 { font-size: 1rem; color: var(--silicate-muted); }
+h6 { font-size: 1rem; color: var(--silicate-muted); font-weight: 400; }
+
+/* Block flow */
+p, ul, ol, dl, pre, blockquote, figure, table, hr, fieldset {
+  margin: 0 0 var(--silicate-space-4);
+}
+ul, ol { padding-left: var(--silicate-space-5); }
+li + li, li > ul, li > ol { margin-top: var(--silicate-space-2); }
+dt { font-weight: 600; }
+dd { margin: 0 0 var(--silicate-space-3); }
+
+/* Links */
+a {
+  color: var(--silicate-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+a:visited { color: var(--silicate-accent-visited); }
+a:hover { text-decoration-thickness: 2px; }
+a:focus-visible { outline: 2px solid var(--silicate-accent); outline-offset: 2px; }
+
+/* Inline */
+strong, b { font-weight: 600; }
+em, i { font-style: italic; }
+small { font-size: 0.875em; color: var(--silicate-muted); }
+mark { background: var(--silicate-selection); color: var(--silicate-fg); padding: 0 0.15em; }
+abbr[title] { text-decoration: underline dotted; cursor: help; }
+kbd {
+  font-family: var(--silicate-font-mono);
+  font-size: 0.875em;
+  padding: 0.1em 0.35em;
+  background: var(--silicate-surface);
+  border: 1px solid var(--silicate-rule);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+}
+
+/* Code */
+code, samp, pre {
+  font-family: var(--silicate-font-mono);
+  font-size: 0.9375em;
+}
+code, samp {
+  background: var(--silicate-surface);
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+pre {
+  padding: var(--silicate-space-4);
+  background: var(--silicate-surface);
+  border-radius: 4px;
+  overflow-x: auto;
+  line-height: 1.45;
+}
+pre code, pre samp { background: none; padding: 0; }
+
+/* Quote */
+blockquote {
+  margin-left: 0;
+  padding: var(--silicate-space-2) var(--silicate-space-4);
+  border-left: 3px solid var(--silicate-rule);
+  color: var(--silicate-muted);
+}
+blockquote > :last-child { margin-bottom: 0; }
+
+/* Rule */
+hr {
+  border: 0;
+  border-top: 1px solid var(--silicate-rule);
+}
+
+/* Media */
+img, video, svg { max-width: 100%; height: auto; }
+figure { margin: var(--silicate-space-5) 0; }
+figcaption {
+  font-size: 0.875em;
+  color: var(--silicate-muted);
+  margin-top: var(--silicate-space-2);
+}
+
+/* Tables */
+table { width: 100%; border-collapse: collapse; }
+caption {
+  text-align: left;
+  font-style: italic;
+  color: var(--silicate-muted);
+  padding-bottom: var(--silicate-space-2);
+}
+th, td {
+  text-align: left;
+  padding: var(--silicate-space-2) var(--silicate-space-3);
+  border-bottom: 1px solid var(--silicate-rule);
+}
+th { font-weight: 600; }
+
+/* Forms */
+fieldset {
+  padding: var(--silicate-space-4);
+  border: 1px solid var(--silicate-rule);
+  border-radius: 4px;
+}
+legend { padding: 0 var(--silicate-space-2); font-weight: 600; }
+label { display: block; margin-bottom: var(--silicate-space-1); font-weight: 600; }
+
+input, select, textarea {
+  font: inherit;
+  color: inherit;
+  width: 100%;
+  padding: var(--silicate-space-2) var(--silicate-space-3);
+  margin-bottom: var(--silicate-space-3);
+  background: var(--silicate-bg);
+  border: 1px solid var(--silicate-rule);
+  border-radius: 4px;
+}
+textarea { min-height: 6rem; resize: vertical; }
+input[type="checkbox"], input[type="radio"] {
+  width: auto;
+  margin-right: var(--silicate-space-2);
+  margin-bottom: 0;
+  vertical-align: middle;
+}
+
+input:focus-visible, select:focus-visible,
+textarea:focus-visible, button:focus-visible {
+  outline: 2px solid var(--silicate-accent);
+  outline-offset: 1px;
+}
+
+button, input[type="submit"], input[type="button"], input[type="reset"] {
+  font: inherit;
+  width: auto;
+  padding: var(--silicate-space-2) var(--silicate-space-4);
+  background: var(--silicate-fg);
+  color: var(--silicate-bg);
+  border: 1px solid var(--silicate-fg);
+  border-radius: 4px;
+  cursor: pointer;
+}
+button:hover, input[type="submit"]:hover { opacity: 0.85; }
+button[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+/* Detail / summary */
+details {
+  padding: var(--silicate-space-3) var(--silicate-space-4);
+  border: 1px solid var(--silicate-rule);
+  border-radius: 4px;
+  margin-bottom: var(--silicate-space-4);
+}
+details[open] summary { margin-bottom: var(--silicate-space-3); }
+summary { font-weight: 600; cursor: pointer; }
+
+/* Print */
+@media print {
+  body { max-width: none; color: #000; background: #fff; padding: 0; }
+  a { color: #000; }
+  pre, code, kbd { background: #f4f4f4; }
+}

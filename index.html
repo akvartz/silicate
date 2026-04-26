@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>silicate — a minimalist design system</title>
+  <meta name="description" content="A minimalist design system. Style raw HTML.">
+  <link rel="stylesheet" href="silicate.css">
+</head>
+<body>
+
+<header>
+  <h1>silicate</h1>
+  <p>A minimalist design system. One stylesheet. No classes. No build step. Style raw HTML and let the content do the work.</p>
+  <p><small>This page is the showcase, the docs, and the test bed — all at once.</small></p>
+</header>
+
+<hr>
+
+<h2>Philosophy</h2>
+<p>
+  silicate descends from
+  <a href="https://motherfuckingwebsite.com/">motherfuckingwebsite.com</a>,
+  <a href="http://bettermotherfuckingwebsite.com/">bettermotherfuckingwebsite.com</a>,
+  and <a href="https://thebestmotherfucking.website/">thebestmotherfucking.website</a>.
+  The original premise still holds: the browser already knows how to render
+  text. We give it just enough help — readable measure, comfortable leading,
+  honest contrast — and step out of the way.
+</p>
+<ul>
+  <li><strong>Content first.</strong> Markup carries meaning; CSS only refines it.</li>
+  <li><strong>Style elements, not classes.</strong> If a tag exists for the job, use it.</li>
+  <li><strong>One file.</strong> Ship the whole system in a single stylesheet.</li>
+  <li><strong>Tokens, not magic numbers.</strong> Every value is a CSS custom property you can override.</li>
+  <li><strong>Light + dark, by default.</strong> Respect <code>prefers-color-scheme</code>.</li>
+  <li><strong>Accessible by default.</strong> Visible focus, generous tap targets, real contrast.</li>
+</ul>
+
+<h2>Use it</h2>
+<pre><code>&lt;link rel="stylesheet" href="silicate.css"&gt;</code></pre>
+<p>Then write HTML. That's the whole API.</p>
+
+<h2>Tokens</h2>
+<p>Every design decision is exposed as a CSS custom property under the <code>--silicate-*</code> namespace. Override at <code>:root</code> to retheme.</p>
+<table>
+  <caption>The token surface</caption>
+  <thead>
+    <tr><th>Group</th><th>Tokens</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Type</td><td><code>--silicate-font-sans</code>, <code>--silicate-font-mono</code>, <code>--silicate-font-size</code>, <code>--silicate-line-height</code>, <code>--silicate-measure</code></td></tr>
+    <tr><td>Space</td><td><code>--silicate-space-1</code> through <code>--silicate-space-7</code></td></tr>
+    <tr><td>Color</td><td><code>--silicate-fg</code>, <code>--silicate-bg</code>, <code>--silicate-muted</code>, <code>--silicate-rule</code>, <code>--silicate-accent</code>, <code>--silicate-accent-visited</code>, <code>--silicate-surface</code>, <code>--silicate-selection</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Retheming example</h3>
+<pre><code>:root {
+  --silicate-measure: 42rem;
+  --silicate-accent: #c2410c;
+  --silicate-font-sans: "Inter", system-ui, sans-serif;
+}</code></pre>
+
+<hr>
+
+<h2>Typography</h2>
+
+<h1>Heading 1 — display</h1>
+<h2>Heading 2 — section</h2>
+<h3>Heading 3 — subsection</h3>
+<h4>Heading 4</h4>
+<h5>Heading 5</h5>
+<h6>Heading 6</h6>
+
+<p>
+  A paragraph of body copy. The default measure is <code>38rem</code> — about
+  seventy characters per line, which keeps the eye from getting lost on its
+  way back. Body size is <code>1.125rem</code> with a <code>1.6</code> line
+  height. Inline elements are honored: <strong>strong text</strong>,
+  <em>emphasis</em>, <a href="#">a link</a>, <a href="https://example.com">a visited link if you've been there</a>,
+  <code>inline code</code>, <mark>a highlight</mark>, <abbr title="HyperText Markup Language">HTML</abbr>,
+  press <kbd>⌘</kbd>+<kbd>K</kbd>, and <small>some small print</small>.
+</p>
+
+<h2>Lists</h2>
+
+<h3>Unordered</h3>
+<ul>
+  <li>Silicon</li>
+  <li>Oxygen
+    <ul>
+      <li>Tetrahedra share corners</li>
+      <li>Sometimes they share edges</li>
+    </ul>
+  </li>
+  <li>Quartz, mica, feldspar</li>
+</ul>
+
+<h3>Ordered</h3>
+<ol>
+  <li>Write semantic markup</li>
+  <li>Link the stylesheet</li>
+  <li>Stop</li>
+</ol>
+
+<h3>Description</h3>
+<dl>
+  <dt>Measure</dt>
+  <dd>The width of a column of text, in characters or ems. Comfortable: 50–75ch.</dd>
+  <dt>Leading</dt>
+  <dd>The vertical space between lines of type. We use 1.6× for body.</dd>
+</dl>
+
+<h2>Code</h2>
+<p>Inline like <code>const silicate = "minimal"</code>, or as a block:</p>
+<pre><code>function greet(name) {
+  return `hello, ${name}`;
+}
+
+greet("world");</code></pre>
+
+<h2>Quote</h2>
+<blockquote>
+  <p>The reason your perfect-pixel-framework-laden grids fail is this: you assumed I cared.</p>
+  <p>— anonymous, paraphrased</p>
+</blockquote>
+
+<h2>Tables</h2>
+<table>
+  <caption>Mineral hardness, Mohs scale</caption>
+  <thead>
+    <tr><th>Mineral</th><th>Hardness</th><th>Composition</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Talc</td><td>1</td><td>Mg₃Si₄O₁₀(OH)₂</td></tr>
+    <tr><td>Quartz</td><td>7</td><td>SiO₂</td></tr>
+    <tr><td>Diamond</td><td>10</td><td>C</td></tr>
+  </tbody>
+</table>
+
+<h2>Media</h2>
+<figure>
+  <img src="https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=900&q=70" alt="A close-up of quartz crystals, illustrating the silicate family.">
+  <figcaption>A figure with caption. Images stay within the measure.</figcaption>
+</figure>
+
+<h2>Forms</h2>
+<form onsubmit="event.preventDefault()">
+  <fieldset>
+    <legend>Sign up</legend>
+
+    <label for="name">Name</label>
+    <input id="name" type="text" placeholder="Ada Lovelace">
+
+    <label for="email">Email</label>
+    <input id="email" type="email" placeholder="ada@example.com" required>
+
+    <label for="role">Role</label>
+    <select id="role">
+      <option>Designer</option>
+      <option>Engineer</option>
+      <option>Both, somehow</option>
+    </select>
+
+    <label for="bio">Bio</label>
+    <textarea id="bio" placeholder="Tell us, briefly."></textarea>
+
+    <label><input type="checkbox"> Subscribe to occasional updates</label>
+    <label><input type="radio" name="plan"> Free</label>
+    <label><input type="radio" name="plan"> Paid</label>
+
+    <p>
+      <button type="submit">Submit</button>
+      <button type="button" disabled>Disabled</button>
+    </p>
+  </fieldset>
+</form>
+
+<h2>Disclosure</h2>
+<details>
+  <summary>What's in a silicate?</summary>
+  <p>Silicates are minerals built from silicon-oxygen tetrahedra. They form the bulk of Earth's crust. Quartz is one. Mica is another.</p>
+</details>
+
+<h2>Rules</h2>
+<p>A horizontal rule splits sections without shouting:</p>
+<hr>
+<p>That's the lot.</p>
+
+<footer>
+  <hr>
+  <p><small>silicate · style raw HTML · <a href="silicate.css">view the stylesheet</a></small></p>
+</footer>
+
+</body>
+</html>
