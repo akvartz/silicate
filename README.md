@@ -116,18 +116,10 @@ Want a brand palette? Set `--silicate-fg`, `--silicate-bg`, and
 
 ## Element coverage
 
-silicate styles the elements you actually ship:
-
-- Sectioning: `body`, `header`, `main`, `footer`, `article`, `section`
-- Headings: `h1`–`h6`
-- Text: `p`, `a`, `strong`, `em`, `small`, `mark`, `abbr`, `kbd`, `code`
-- Lists: `ul`, `ol`, `dl`, `dt`, `dd`
-- Block: `pre`, `blockquote`, `figure`, `figcaption`, `hr`
-- Tables: `table`, `caption`, `thead`, `tbody`, `tr`, `th`, `td`
-- Forms: `form`, `fieldset`, `legend`, `label`, `input`, `select`,
-  `textarea`, `button`
-- Disclosure: `details`, `summary`
-- Media: `img`, `video`, `svg`, `picture`
+silicate styles every element you'll ship: sectioning, headings, text,
+lists, code, blockquote, tables, figures, forms, disclosure, media,
+rules. See [`docs/elements.md`](docs/elements.md) for the per-element
+reference, or open `index.html` for the live version.
 
 If you reach for a `<div class="…">`, ask first: is there a tag for this?
 
@@ -140,18 +132,26 @@ By design:
 - No icons, no JS components, no themes-as-a-package.
 - No opinions about your build pipeline.
 
-silicate is a foundation. Build on top of it; don't fight it.
+silicate is a foundation. Build on top of it; don't fight it. When you do
+need a real-world layout (nav, two columns, callouts), see
+[`docs/cookbook.md`](docs/cookbook.md) for the smallest amount of code
+that will get you there honestly.
 
 ## Project layout
 
 ```
 silicate/
-├── README.md       — you are here
-├── silicate.css    — the design system, one file
-└── index.html      — living showcase + style guide
+├── README.md         — you are here
+├── CHANGELOG.md      — what's landed
+├── silicate.css      — the design system, one file
+├── index.html        — living showcase + style guide
+└── docs/
+    ├── elements.md   — per-element behavior reference
+    └── cookbook.md   — recipes for common patterns
 ```
 
 ## Status
 
 Foundation. Tokens, base elements, light/dark, print. Enough to build a
-real page today. More will land as we use it in anger.
+real page today. More will land as we use it in anger. See the
+[CHANGELOG](CHANGELOG.md).
