@@ -1,51 +1,44 @@
-# silicate
+# Silicate Design System
 
-A minimalist design system. One stylesheet. No classes. No build step.
-Style raw HTML and let the content do the work.
+> A well-set book page, not a landing page.
 
-> The browser already knows how to render text. We give it just enough help —
-> readable measure, comfortable leading, honest contrast — and step out of the
-> way.
+Silicate is a brutally minimal, content-first design system. It is **one
+stylesheet that styles raw HTML elements** — no frameworks, no classes,
+no build step. The browser's defaults are 90% right; we fix line length,
+leading, and contrast and stop.
 
-## Lineage
+If HTML has a tag for it (`<button>`, `<article>`, `<details>`,
+`<figure>`), you use the tag. You do not wrap it in a `<div class="card">`.
 
-silicate is the direct descendant of three short manifestos:
+## Sources
 
-- [motherfuckingwebsite.com](https://motherfuckingwebsite.com/) — _the
-  browser's defaults are already good._
-- [bettermotherfuckingwebsite.com](http://bettermotherfuckingwebsite.com/) —
-  _seven lines of CSS make them better._
-- [thebestmotherfucking.website](https://thebestmotherfucking.website/) —
-  _a little more, but not much._
+- **Repo:** [`akvartz/silicate`](https://github.com/akvartz/silicate) — at
+  the time of writing, the public repo contains only a placeholder README.
+  This system was built from the brief; if a richer source appears later,
+  reconcile against it.
+- **Brief:** "Brutally minimal, content-first, content-only. Visually:
+  generous whitespace, a single readable column (~70 characters wide),
+  system fonts, one accent color for links and focus, hairline rules
+  instead of boxes, no shadows, no gradients, no rounded-corner-everything.
+  Light and dark mode swap automatically with the OS."
 
-silicate keeps the spirit and adds the bare minimum a real product needs:
-a token system, dark mode, focus styles, and styled coverage of every
-HTML element you'll actually use.
+## What's in this folder
 
-## Principles
+- `silicate.css` — the whole design system. Drop this into a page and
+  silicate is on. All styling targets bare HTML elements; there are no
+  utility classes.
+- `colors_and_type.css` — the **token layer** alone. Use when you want
+  Silicate's variables without the element styles (e.g. inside another
+  app's component code).
+- `assets/` — logos and brand marks.
+- `preview/` — small HTML cards used to populate the Design System tab.
+  Each isolates one concept (color scale, type specimen, button states).
+- `ui_kits/article/` — the canonical surface: a long-form article. The
+  `index.html` is what a typical Silicate page looks like in production.
+- `SKILL.md` — Agent Skills manifest, so this folder works as a
+  drop-in skill in Claude Code.
 
-1. **Content first.** Markup carries meaning; CSS only refines it.
-2. **Style elements, not classes.** If a tag exists for the job, use it.
-   No `.btn`, no `.card` — `<button>`, `<article>`.
-3. **One file, no dependencies.** The whole system is `silicate.css`.
-   Drop it in. Done.
-4. **Tokens, not magic numbers.** Every value is a `--silicate-*` custom
-   property. Override at `:root` to retheme.
-5. **Light + dark, by default.** Honors `prefers-color-scheme`. The user
-   wins, not us.
-6. **Accessible by default.** Visible focus rings, real contrast, generous
-   tap targets, semantic landmarks.
-7. **Print is a first-class medium.** Pages reflow and ink stays cheap.
-8. **No JavaScript.** The system is presentation; behavior is your
-   business.
-
-## Use it
-
-```html
-<link rel="stylesheet" href="silicate.css">
-```
-
-That's the whole API. Now write HTML.
+## Quick start
 
 ```html
 <!doctype html>
@@ -53,105 +46,282 @@ That's the whole API. Now write HTML.
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello</title>
+  <title>An essay</title>
   <link rel="stylesheet" href="silicate.css">
 </head>
 <body>
-  <h1>Hello</h1>
-  <p>This is already styled.</p>
+  <main>
+    <article>
+      <header>
+        <time datetime="2026-04-25">April 25, 2026</time>
+        <h1>An essay</h1>
+      </header>
+      <p>Write words. Don't reach for a class.</p>
+    </article>
+  </main>
 </body>
 </html>
 ```
 
-Open `index.html` in this repo for the full living showcase.
-
-## Tokens
-
-All design decisions are exposed as CSS custom properties under the
-`--silicate-*` namespace.
-
-### Type
-
-| Token                       | Default                          | Purpose                          |
-| --------------------------- | -------------------------------- | -------------------------------- |
-| `--silicate-font-sans`      | system UI sans stack             | Body and headings                |
-| `--silicate-font-mono`      | system UI mono stack             | Code, kbd, samp                  |
-| `--silicate-font-size`      | `1.125rem` (18px)                | Body size                        |
-| `--silicate-line-height`    | `1.6`                            | Body leading                     |
-| `--silicate-measure`        | `38rem` (~70 chars)              | Max line length                  |
-
-### Space
-
-A geometric scale (~1.5×) from `--silicate-space-1` (0.25rem) to
-`--silicate-space-7` (3.5rem). Use `4` for default block flow, `5`/`6`
-for section breathing room.
-
-### Color
-
-| Token                            | Light       | Dark       | Purpose                       |
-| -------------------------------- | ----------- | ---------- | ----------------------------- |
-| `--silicate-fg`                  | `#1a1a1a`   | `#e8e8e6`  | Body text                     |
-| `--silicate-bg`                  | `#fafaf7`   | `#111`     | Page background               |
-| `--silicate-muted`               | `#666`      | `#999`     | De-emphasized text            |
-| `--silicate-rule`                | `#ddd`      | `#333`     | Borders, hairlines            |
-| `--silicate-accent`              | `#0a66c2`   | `#6cb6ff`  | Links, focus rings            |
-| `--silicate-accent-visited`      | `#6b3fa0`   | `#c9a3ff`  | Visited links                 |
-| `--silicate-surface`             | `#f0f0eb`   | `#1c1c1c`  | Code blocks, kbd backgrounds  |
-| `--silicate-selection`           | `#ffec99`   | `#5a4d1f`  | Text selection, marks         |
+That is the entire integration. Do not add classes; add semantics.
 
 ## Retheming
 
-Override tokens at `:root` (or any scope). No build, no plugin.
+Every design value is a `--silicate-*` variable. To retheme: override at
+`:root`. Five lines is enough.
 
 ```css
 :root {
-  --silicate-measure: 42rem;
-  --silicate-accent: #c2410c;
-  --silicate-font-sans: "Inter", system-ui, sans-serif;
+  --silicate-font-body: "EB Garamond", Georgia, serif;
+  --silicate-accent: #458588;   /* gruvbox blue, e.g. */
+  --silicate-bg: #f9f5d7;       /* gruvbox bg0_h */
+  --silicate-fg: #3c3836;
+  --silicate-measure: 38rem;
 }
 ```
 
-Want a brand palette? Set `--silicate-fg`, `--silicate-bg`, and
-`--silicate-accent` in both light and dark blocks. That's it.
+---
 
-## Element coverage
+## CONTENT FUNDAMENTALS
 
-silicate styles every element you'll ship: sectioning, headings, text,
-lists, code, blockquote, tables, figures, forms, disclosure, media,
-rules. See [`docs/elements.md`](docs/elements.md) for the per-element
-reference, or open `index.html` for the live version.
+**The vibe.** Closer to a Knuth paper than a Stripe homepage. The user's
+eye should land on the words, not the chrome. Write as if you respect
+your reader's time and intelligence.
 
-If you reach for a `<div class="…">`, ask first: is there a tag for this?
+**Voice.** Plain, declarative, slightly wry. Short sentences are a
+feature, not a target. Avoid marketing throat-clearing ("we're excited
+to announce"). Avoid hedging ("might possibly help you maybe"). State
+the thing.
 
-## What silicate does *not* include
+- Yes: "Silicate styles raw HTML. There are no classes."
+- No:  "Silicate empowers teams to ship beautifully crafted, accessible
+  experiences with a delightful authoring DX."
 
-By design:
+**Person.** Second-person ("you") for instructions. First-person plural
+("we") only when talking about silicate-the-project's choices. Never the
+royal corporate "we" pretending to be your friend.
 
-- No grid system. Use CSS grid or flexbox where you need them.
-- No utility classes. Add your own if your project warrants them.
-- No icons, no JS components, no themes-as-a-package.
-- No opinions about your build pipeline.
+**Casing.** Sentence case for headings. Title Case for proper nouns
+only. No ALL CAPS except for `<h5>` eyebrow labels (where it's a typographic
+device, not a tonal one). No "Capitalized Marketing Phrases."
 
-silicate is a foundation. Build on top of it; don't fight it. When you do
-need a real-world layout (nav, two columns, callouts), see
-[`docs/cookbook.md`](docs/cookbook.md) for the smallest amount of code
-that will get you there honestly.
+**Punctuation.** Em-dashes are fine. Oxford comma. One space after
+periods. Periods inside quotes when American. Numbers under ten written
+out, except in technical contexts (`70 characters`, `1px`, `18px`).
 
-## Project layout
+**Emoji.** No. Silicate uses none. If you need a glyph, prefer a real
+typographic mark — `§`, `¶`, `→`, `—`, `·`, `†`. The accent color and a
+hairline rule do more work than 🎉 ever will.
 
-```
-silicate/
-├── README.md         — you are here
-├── CHANGELOG.md      — what's landed
-├── silicate.css      — the design system, one file
-├── index.html        — living showcase + style guide
-└── docs/
-    ├── elements.md   — per-element behavior reference
-    └── cookbook.md   — recipes for common patterns
-```
+**Length.** Short. Cut the introduction; start with the verb. Section
+headings should be nouns or imperative verbs, not questions ("Pricing,"
+"Install Silicate," not "How does pricing work?").
 
-## Status
+**Examples of in-system copy:**
 
-Foundation. Tokens, base elements, light/dark, print. Enough to build a
-real page today. More will land as we use it in anger. See the
-[CHANGELOG](CHANGELOG.md).
+> Drop one stylesheet in. There are no classes.
+
+> If HTML has a tag for it, use the tag.
+
+> Override `--silicate-accent` to retheme.
+
+> Light and dark swap with the OS. You don't need a toggle.
+
+---
+
+## VISUAL FOUNDATIONS
+
+### Color
+
+The palette is **gruvbox** — Pavel Pertsev's retro-warm scheme, ported to
+a reading surface. **Light** is gruvbox cream (`#fbf1c7`, bg0) against
+deep brown (`#3c3836`); **dark** is the canonical gruvbox dark
+(`#282828`, bg0) against fg1 cream (`#ebdbb2`). The cream + brown pair
+is warmer than off-white + black and reads like an old Linux console
+or a well-worn paperback.
+
+The single accent is **gruvbox orange** — faded (`#af3a03`) in light,
+bright (`#fe8019`) in dark — used for **links, focus rings, and the
+filled `submit` button.** That is its whole job. Do not introduce a
+second accent. Other gruvbox hues (yellow, green, red) appear only in
+the rarely-used `--silicate-mark`, `--silicate-success`, and
+`--silicate-danger` tokens.
+
+Semantic colors (`success`, `warning`, `danger`) exist in the token file
+but are used **rarely** — Silicate prefers prose ("This will delete the
+record permanently. Type the project name to confirm.") to a red banner.
+
+Imagery, when present, leans warm and matte. No saturated stock photography,
+no neon, no duotone. B&W or sepia archival imagery is on-brand.
+
+### Type
+
+System serif by default — `Iowan Old Style`, falling back through
+`Palatino`, `Book Antiqua`, `Georgia`, `Times`. The point is that the
+reader's machine almost certainly already has a good book serif
+installed; we use it. No webfont round-trip, no FOUT.
+
+- **Body:** 18px serif at 1.55 line-height — calibrated against the
+  34rem (~70ch) measure.
+- **Headings:** Same family as body, 600 weight, tighter leading (1.2).
+  No display face. The same letterforms throughout the page.
+- **Mono:** `ui-monospace` → `SF Mono` → `Menlo` → `Consolas`.
+- **Sans:** kept in the token file for UI surfaces (forms, buttons in
+  app contexts) but **not** the default body. The default is serif.
+
+### Spacing
+
+A 7-step scale: `4px → 8px → 16px → 24px → 32px → 48px → 80px`. Use
+`--silicate-space-*`. Headings get larger top margins (space-6) than
+bottom margins (space-3) — the "looser above, tighter below" rule.
+
+### Layout
+
+**One column. ~70 characters wide.** That is the design. Everything in
+`<body>` is centered with `max-width: var(--silicate-measure)`. To
+escape the column for a wide image or pull-quote, use
+`<figure data-bleed>` — a deliberate, semantic escape hatch. There is no
+grid system. There are no sidebars. If you need sidebars, you are
+building something Silicate is not for.
+
+### Backgrounds
+
+The page background is a flat warm tone. **No gradients, no images, no
+textures, no patterns.** The only "texture" the page has is the type.
+Code blocks and `<kbd>` get a subtly warmer tint (`--silicate-bg-sunken`
+/ `--silicate-code-bg`) — the same hue as the page, two steps darker.
+
+### Borders & rules
+
+**Hairlines, not boxes.** 1px borders in `--silicate-rule`, used for:
+horizontal `<hr>`, table row dividers, `<details>` separators,
+`<blockquote>` left rule, form field underlines, `<fieldset>` top rule,
+button outlines. No card-style 1px borders on all four sides. No
+rounded corners — `border-radius: 0` everywhere, including buttons and
+inputs. Form inputs are bare with a single bottom rule.
+
+### Shadows
+
+**None.** Anywhere. Not on cards, not on dropdowns, not on hovered
+buttons. Elevation is communicated by hairlines, whitespace, and order
+on the page.
+
+### Corner radii
+
+`0` everywhere. Sharp corners are a feature.
+
+### Cards
+
+There are none. If you find yourself needing a card, you are wrapping an
+`<article>`, a `<figure>`, or a `<details>` — use the element.
+Whitespace and a top hairline give it the structure it needs.
+
+### Hover states
+
+- **Links:** underline thickens from 1px to 2px. Color does not change.
+- **Outlined buttons:** invert — fg becomes bg, bg becomes fg. No
+  transition delay.
+- **Filled (submit) buttons:** bg goes from accent to fg.
+
+### Press / active states
+
+Browser default. We do not animate a "shrink" or color flash. The
+state change on hover does the work.
+
+### Focus
+
+A single 2px outline ring in `--silicate-accent`, offset 2px. Same
+treatment everywhere — links, buttons, inputs. Inputs additionally
+thicken their bottom rule on focus.
+
+### Animation
+
+**Effectively none.** No fades, no slides, no bounces, no parallax. The
+only transitions are browser defaults on hover (instantaneous) and
+`<details>` expanding (browser default). If you reach for a keyframe,
+you are out of scope.
+
+### Transparency & blur
+
+None. Backgrounds are solid. There is no `backdrop-filter` anywhere.
+
+### Iconography
+
+Almost none. See ICONOGRAPHY below.
+
+### Imagery
+
+Plain `<img>` inside `<figure>`. No filters, no overlays, no rounded
+corners, no fixed aspect ratio. `<figcaption>` carries the credit. Wide
+images use `<figure data-bleed>`.
+
+### Fixed elements
+
+None. Silicate has no sticky header, no floating button, no toast
+overlay, no fixed sidebar. The page is the document. If you scroll, the
+chrome scrolls with you because there isn't any.
+
+---
+
+## ICONOGRAPHY
+
+**Silicate's position on iconography is: don't.** Words are clearer than
+icons; the system is built around prose. There is no built-in icon font,
+no icon component, no SVG sprite shipped with the stylesheet.
+
+When an icon is genuinely needed (for example, an external-link
+indicator or a permalink anchor), use a **typographic mark**, not a
+custom SVG:
+
+| Need               | Use                       |
+|--------------------|---------------------------|
+| External link      | `↗`                        |
+| Permalink anchor   | `§`                        |
+| Footnote reference | `†`, `‡`                   |
+| List bullet        | the browser default disc   |
+| Dropdown indicator | `+` / `−` (used in `<details>`) |
+| Section break      | `* * *` or `<hr>`          |
+| Right arrow        | `→`                        |
+| Em dash            | `—`                        |
+
+**Emoji:** never. Silicate is a reading surface; emoji read as casual
+chat decoration and break the typographic register.
+
+**Logos / brand marks:** see `assets/`. The wordmark is set in the body
+serif, weight 600, tracking tight. There is no logo lockup that depends
+on a glyph beyond the wordmark.
+
+**If you need a real icon set** (for an app surface built *on top* of
+Silicate, not Silicate itself): substitute [Lucide](https://lucide.dev)
+via CDN — its hairline 1.5px stroke and sharp join style match the
+hairline rules in this system better than fill-style sets like
+Material. **Flag the substitution in your handoff** — it is not part of
+the canonical system.
+
+---
+
+## Index
+
+| File                              | What's in it                                      |
+|-----------------------------------|---------------------------------------------------|
+| `silicate.css`                    | The whole stylesheet. The system.                 |
+| `colors_and_type.css`             | Tokens only — variables, no element rules.        |
+| `assets/wordmark.svg`             | Silicate wordmark (light + dark via currentColor).|
+| `preview/*.html`                  | Design System tab cards.                          |
+| `ui_kits/article/index.html`      | The canonical surface — a long-form article.      |
+| `ui_kits/article/*.html`          | Component-level demonstrations.                   |
+| `SKILL.md`                        | Agent Skills manifest.                            |
+
+## Ground rules for designers using Silicate
+
+1. **Use the tag.** If HTML has it, use it. No `<div class="card">`.
+2. **No classes.** If you find yourself writing one, you are in the
+   wrong system.
+3. **No new colors.** The accent is the accent. If you need a second,
+   you are designing something Silicate isn't for.
+4. **No shadows, no radius, no gradients.** Ever.
+5. **One column, ~70ch.** Escape with `<figure data-bleed>` only when
+   the content genuinely demands it.
+6. **Words over icons.** A label is clearer than a glyph.
+7. **Sentence case.** No Title Case in headings.
+8. **Light/dark with OS.** No toggle. The reader's machine knows.

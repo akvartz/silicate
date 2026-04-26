@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=700, initial-scale=1">
+<title>Silicate · no shadows / no radius</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding: 24px 32px; background:#fbf1c7; color:#3c3836; font: 400 13px/1.5 var(--silicate-font-sans); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 18px; align-items: end; }
+  .col { display: flex; flex-direction: column; gap: 10px; }
+  .label { font-family: var(--silicate-font-mono); font-size: 11px; color: #665c54; text-transform: uppercase; letter-spacing: 0.06em; }
+  .square { width: 100%; height: 80px; background: #ebdbb2; border: 1px solid #d5c4a1; }
+  .strike { position: relative; }
+  .strike::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top right, transparent calc(50% - 1px), #9d0006, transparent calc(50% + 1px)); }
+  .ban { color: #9d0006; font-weight: 600; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="col">
+      <div class="label">corner radius</div>
+      <div class="square"></div>
+      <div><span class="ban">0</span> everywhere. Sharp corners.</div>
+    </div>
+    <div class="col">
+      <div class="label">shadow</div>
+      <div class="square strike"></div>
+      <div><span class="ban">none</span>. Anywhere. Ever.</div>
+    </div>
+    <div class="col">
+      <div class="label">gradient</div>
+      <div class="square strike"></div>
+      <div><span class="ban">none</span>. Backgrounds are flat.</div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=700, initial-scale=1">
+<title>Silicate · rules</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin: 0; padding: 26px 32px; background: #fbf1c7; color: #3c3836; font: var(--silicate-type-body); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .item { display: flex; flex-direction: column; gap: 8px; }
+  .label { font-family: var(--silicate-font-mono); font-size: 11px; color: #665c54; text-transform: uppercase; letter-spacing: 0.06em; }
+  hr.r1 { border: none; border-top: 1px solid #d5c4a1; margin: 0; }
+  hr.r2 { border: none; border-top: 1px solid #bdae93; margin: 0; }
+  blockquote { margin: 0; padding-left: 16px; border-left: 1px solid #d5c4a1; color: #665c54; font-style: italic; font-size: 15px; }
+  .underline { border-bottom: 1px solid #d5c4a1; padding: 6px 0; font-size: 14px; color: #665c54; }
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="item"><div class="label">rule</div><hr class="r1"><div class="label" style="text-transform:none">1px · #d5c4a1</div></div>
+    <div class="item"><div class="label">rule-strong</div><hr class="r2"><div class="label" style="text-transform:none">1px · #bdae93</div></div>
+    <div class="item"><div class="label">blockquote</div><blockquote>Hairlines, not boxes.</blockquote></div>
+    <div class="item"><div class="label">field underline</div><div class="underline">name@silicate.css</div></div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=700, initial-scale=1">
+<title>Silicate · buttons</title>
+<link rel="stylesheet" href="../silicate.css">
+<style>
+  body { margin: 0; }
+  main { padding: 22px 28px; }
+  .row { display: flex; gap: 14px; align-items: center; flex-wrap: wrap; margin-bottom: 14px; }
+  .label { font-family: var(--silicate-font-mono); font-size: 11px; color: #665c54; text-transform: uppercase; letter-spacing: 0.06em; min-width: 92px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="row"><div class="label">default</div><button>Save draft</button><button disabled>Disabled</button></div>
+  <div class="row"><div class="label">submit</div><button type="submit">Publish</button><input type="submit" value="Subscribe"></div>
+  <div class="row"><div class="label">link-as-action</div><a href="#">Read more →</a></div>
+</main>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — silicate</title>
+<link rel="stylesheet" href="../../silicate.css">
+<style>
+  body > nav { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--silicate-rule); }
+  body > nav strong { font-weight: 600; }
+  body > nav a { color: var(--silicate-fg); text-decoration: none; }
+</style>
+</head>
+<body>
+  <nav>
+    <strong>silicate</strong>
+    <span><a href="index.html">← back</a></span>
+  </nav>
+  <main>
+    <article>
+      <header>
+        <h1>Contact</h1>
+        <p>Send a note. There is no support form, no chat widget, no toast.</p>
+      </header>
+      <form onsubmit="event.preventDefault(); this.replaceWith(Object.assign(document.createElement('p'),{textContent:'Sent. Thank you.'}));">
+        <label for="from">From</label>
+        <input id="from" type="email" required placeholder="name@silicate.css">
+
+        <label for="subj">Subject</label>
+        <input id="subj" type="text" required>
+
+        <label for="body">Message</label>
+        <textarea id="body" rows="6" required></textarea>
+
+        <button type="submit">Send</button>
+      </form>
+    </article>
+  </main>
+</body>
+</html>

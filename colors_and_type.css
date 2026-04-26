@@ -1,0 +1,110 @@
+/* ==========================================================================
+   colors_and_type.css
+   --------------------------------------------------------------------------
+   Token surface for Silicate. Mirrors silicate.css but isolates the
+   foundation layer so it can be re-themed in five lines.
+
+   Every value is a --silicate-* CSS variable. Override at :root to retheme.
+   ========================================================================== */
+
+:root {
+  /* ---------- families ---------- */
+  --silicate-font-serif:
+    "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
+    Georgia, "Times New Roman", Times, serif;
+  --silicate-font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --silicate-font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
+    "Liberation Mono", monospace;
+  --silicate-font-body: var(--silicate-font-serif);
+
+  /* ---------- type scale ---------- */
+  --silicate-size-base:  1.125rem;   /* 18px */
+  --silicate-size-small: 0.9rem;
+  --silicate-size-tiny:  0.8rem;
+  --silicate-size-h1:    2.25rem;
+  --silicate-size-h2:    1.625rem;
+  --silicate-size-h3:    1.25rem;
+  --silicate-size-h4:    1.0625rem;
+  --silicate-size-h5:    1rem;
+  --silicate-size-h6:    0.9375rem;
+
+  --silicate-leading:        1.55;
+  --silicate-leading-tight:  1.2;
+  --silicate-tracking-caps:  0.06em;
+  --silicate-tracking-tight: -0.01em;
+
+  --silicate-measure: 34rem;          /* ~70ch at 18px serif */
+
+  /* ---------- semantic type recipes (consume these in components) ---------- */
+  /* Use as: font: var(--silicate-type-h1); */
+  --silicate-type-h1:    600 var(--silicate-size-h1)/var(--silicate-leading-tight) var(--silicate-font-body);
+  --silicate-type-h2:    600 var(--silicate-size-h2)/var(--silicate-leading-tight) var(--silicate-font-body);
+  --silicate-type-h3:    600 var(--silicate-size-h3)/var(--silicate-leading-tight) var(--silicate-font-body);
+  --silicate-type-h4:    600 var(--silicate-size-h4)/var(--silicate-leading-tight) var(--silicate-font-body);
+  --silicate-type-body:  400 var(--silicate-size-base)/var(--silicate-leading)     var(--silicate-font-body);
+  --silicate-type-small: 400 var(--silicate-size-small)/var(--silicate-leading)    var(--silicate-font-body);
+  --silicate-type-mono:  400 0.9em/1.5 var(--silicate-font-mono);
+
+  /* ==========================================================================
+     COLOR — gruvbox-inspired palette
+     fg/bg semantic; rule for hairlines; accent for links + focus.
+     ========================================================================== */
+
+  /* foreground */
+  --silicate-fg:        #3c3836;   /* gruvbox fg (dark on light) */
+  --silicate-fg-muted:  #665c54;   /* fg2 */
+  --silicate-fg-faint:  #928374;   /* gray */
+
+  /* background */
+  --silicate-bg:        #fbf1c7;   /* bg0 — cream */
+  --silicate-bg-sunken: #ebdbb2;   /* bg1 */
+
+  /* structure */
+  --silicate-rule:        #d5c4a1; /* bg2 */
+  --silicate-rule-strong: #bdae93; /* bg3 */
+
+  /* accent — gruvbox faded orange */
+  --silicate-accent:     #af3a03;
+  --silicate-accent-on:  #fbf1c7;
+
+  /* highlight + selection */
+  --silicate-mark:       #fabd2f;  /* yellow */
+
+  /* code surface */
+  --silicate-code-bg:    #ebdbb2;
+  --silicate-code-fg:    #3c3836;
+
+  /* semantic (rare — silicate uses sparingly) */
+  --silicate-success:    #79740e;  /* faded green */
+  --silicate-warning:    #b57614;  /* faded yellow */
+  --silicate-danger:     #9d0006;  /* faded red */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --silicate-fg:        #ebdbb2;  /* fg1 */
+    --silicate-fg-muted:  #a89984;  /* fg4 */
+    --silicate-fg-faint:  #7c6f64;  /* bg4 */
+
+    --silicate-bg:        #282828;  /* bg0 */
+    --silicate-bg-sunken: #3c3836;  /* bg1 */
+
+    --silicate-rule:        #504945; /* bg2 */
+    --silicate-rule-strong: #665c54; /* bg3 */
+
+    --silicate-accent:    #fe8019;   /* bright orange */
+    --silicate-accent-on: #282828;
+
+    --silicate-mark:      #d79921;   /* yellow */
+
+    --silicate-code-bg:   #3c3836;
+    --silicate-code-fg:   #ebdbb2;
+
+    --silicate-success:   #b8bb26;   /* bright green */
+    --silicate-warning:   #fabd2f;   /* bright yellow */
+    --silicate-danger:    #fb4934;   /* bright red */
+  }
+}

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Components — silicate</title>
+<link rel="stylesheet" href="../../silicate.css">
+<style>
+  body > nav { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--silicate-rule); }
+  body > nav strong { font-weight: 600; }
+  body > nav a { color: var(--silicate-fg); text-decoration: none; }
+  body > nav a:hover { text-decoration: underline; }
+  h2 { border-top: 1px solid var(--silicate-rule); padding-top: var(--silicate-space-4); }
+</style>
+</head>
+<body>
+  <nav>
+    <strong>silicate</strong>
+    <span><a href="index.html">← back</a></span>
+  </nav>
+
+  <main>
+    <article>
+      <header>
+        <h1>Components</h1>
+        <p>Every interactive element silicate styles, in the order you'd usually meet them.</p>
+      </header>
+
+      <h2>Buttons</h2>
+      <p>
+        <button>Save draft</button>
+        &nbsp;
+        <button type="submit">Publish</button>
+        &nbsp;
+        <button disabled>Disabled</button>
+      </p>
+      <p>The default is outlined; <code>type="submit"</code> is the filled accent variant. There is no <q>primary</q> class.</p>
+
+      <h2>A form</h2>
+      <form onsubmit="event.preventDefault(); this.querySelector('output').textContent='Subscribed.';">
+        <label for="n">Name</label>
+        <input id="n" type="text" placeholder="Donald Knuth">
+
+        <label for="e">Email</label>
+        <input id="e" type="email" required placeholder="name@silicate.css">
+
+        <fieldset>
+          <legend>Cadence</legend>
+          <label><input type="radio" name="c" checked> When something is written</label>
+          <label><input type="radio" name="c"> Monthly digest</label>
+        </fieldset>
+
+        <label for="m">Note</label>
+        <textarea id="m" rows="3" placeholder="Optional."></textarea>
+
+        <button type="submit">Subscribe</button>
+        &nbsp;<output></output>
+      </form>
+
+      <h2>Disclosure</h2>
+      <details open>
+        <summary>What's in the box?</summary>
+        <p>One stylesheet. No JavaScript. No build step. No classes.</p>
+      </details>
+      <details>
+        <summary>Can I use it in production?</summary>
+        <p>Yes. It's about 11kB unminified. Inline it.</p>
+      </details>
+
+      <h2>Table</h2>
+      <table>
+        <thead>
+          <tr><th>Element</th><th>Behavior</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;a&gt;</code></td><td>Underlined, accent color, thicker on hover.</td></tr>
+          <tr><td><code>&lt;blockquote&gt;</code></td><td>Italic, left hairline, muted color.</td></tr>
+          <tr><td><code>&lt;details&gt;</code></td><td>+ / − marker, hairline above &amp; below.</td></tr>
+          <tr><td><code>&lt;kbd&gt;</code></td><td>Mono, hairline border, sunken bg.</td></tr>
+        </tbody>
+      </table>
+
+      <h2>Inline</h2>
+      <p>Press <kbd>⌘</kbd> + <kbd>K</kbd> to open the index. Use <code>--silicate-accent</code> to retheme. The <abbr title="World Wide Web Consortium">W3C</abbr> got most of this right in 1997. <mark>This bit matters.</mark></p>
+    </article>
+  </main>
+</body>
+</html>

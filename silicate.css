@@ -1,245 +1,361 @@
-/*
- * silicate — a minimalist design system.
- * Style raw HTML. Reach for a class only when semantics fall short.
- *
- * Inspired by:
- *   https://motherfuckingwebsite.com/
- *   http://bettermotherfuckingwebsite.com/
- *   https://thebestmotherfucking.website/
- */
+/* ==========================================================================
+   silicate.css — a brutally minimal, content-first stylesheet
+   --------------------------------------------------------------------------
+   No frameworks. No classes. No build step.
+   Style raw HTML elements. The browser's defaults are 90% right.
+   We fix line length, leading, and contrast — and stop.
+   ========================================================================== */
 
 :root {
-  color-scheme: light dark;
-
-  /* Type */
-  --silicate-font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    "Helvetica Neue", Arial, sans-serif;
-  --silicate-font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas,
+  /* ---------- type ---------- */
+  --silicate-font-serif:
+    "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua",
+    Georgia, "Times New Roman", Times, serif;
+  --silicate-font-sans:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --silicate-font-mono:
+    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas,
     "Liberation Mono", monospace;
-  --silicate-font-size: 1.125rem;
-  --silicate-line-height: 1.6;
-  --silicate-measure: 38rem;
+  --silicate-font-body: var(--silicate-font-serif);
 
-  /* Space (geometric, ~1.5x) */
-  --silicate-space-1: 0.25rem;
-  --silicate-space-2: 0.5rem;
-  --silicate-space-3: 0.75rem;
-  --silicate-space-4: 1rem;
-  --silicate-space-5: 1.5rem;
-  --silicate-space-6: 2.25rem;
-  --silicate-space-7: 3.5rem;
+  --silicate-size-base: 1.125rem;     /* 18px */
+  --silicate-leading: 1.55;
+  --silicate-leading-tight: 1.2;
+  --silicate-measure: 34rem;          /* ~70 characters at 18px serif */
 
-  /* Color — light */
-  --silicate-fg: #1a1a1a;
-  --silicate-bg: #fafaf7;
-  --silicate-muted: #666;
-  --silicate-rule: #ddd;
-  --silicate-accent: #0a66c2;
-  --silicate-accent-visited: #6b3fa0;
-  --silicate-surface: #f0f0eb;
-  --silicate-selection: #ffec99;
+  /* ---------- color (light) — gruvbox light ---------- */
+  --silicate-bg:        #fbf1c7;      /* gruvbox light bg0 */
+  --silicate-fg:        #3c3836;      /* gruvbox dark fg, used on light */
+  --silicate-fg-muted:  #665c54;      /* fg2 */
+  --silicate-rule:      #d5c4a1;      /* bg2 */
+  --silicate-mark:      #fabd2f;      /* yellow */
+  --silicate-accent:    #af3a03;      /* faded orange — links + focus */
+  --silicate-accent-on: #fbf1c7;      /* text on accent */
+  --silicate-code-bg:   #ebdbb2;      /* bg1 */
+
+  /* ---------- spacing ---------- */
+  --silicate-space-1:  0.25rem;
+  --silicate-space-2:  0.5rem;
+  --silicate-space-3:  1rem;
+  --silicate-space-4:  1.5rem;
+  --silicate-space-5:  2rem;
+  --silicate-space-6:  3rem;
+  --silicate-space-7:  5rem;
+
+  /* ---------- structure ---------- */
+  --silicate-rule-width: 1px;
+  --silicate-focus-ring: 2px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --silicate-fg: #e8e8e6;
-    --silicate-bg: #111;
-    --silicate-muted: #999;
-    --silicate-rule: #333;
-    --silicate-accent: #6cb6ff;
-    --silicate-accent-visited: #c9a3ff;
-    --silicate-surface: #1c1c1c;
-    --silicate-selection: #5a4d1f;
+    /* gruvbox dark */
+    --silicate-bg:        #282828;   /* bg0 */
+    --silicate-fg:        #ebdbb2;   /* fg1 */
+    --silicate-fg-muted:  #a89984;   /* fg4 */
+    --silicate-rule:      #504945;   /* bg2 */
+    --silicate-mark:      #d79921;   /* yellow */
+    --silicate-accent:    #fe8019;   /* bright orange — links + focus */
+    --silicate-accent-on: #282828;
+    --silicate-code-bg:   #3c3836;   /* bg1 */
   }
 }
 
-/* Reset (the bare minimum) */
+/* ==========================================================================
+   reset — the lightest possible
+   ========================================================================== */
+
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
-  font-size: 100%;
   -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0 auto;
-  padding: var(--silicate-space-6) var(--silicate-space-4);
-  max-width: var(--silicate-measure);
-  font-family: var(--silicate-font-sans);
-  font-size: var(--silicate-font-size);
-  line-height: var(--silicate-line-height);
-  color: var(--silicate-fg);
+  margin: 0;
   background: var(--silicate-bg);
-  text-rendering: optimizeLegibility;
+  color: var(--silicate-fg);
+  font-family: var(--silicate-font-body);
+  font-size: var(--silicate-size-base);
+  line-height: var(--silicate-leading);
+  text-wrap: pretty;
 }
 
-::selection { background: var(--silicate-selection); color: var(--silicate-fg); }
+/* ==========================================================================
+   layout — one column, wide margins, optional hang
+   ========================================================================== */
 
-/* Headings */
+body > * {
+  max-width: var(--silicate-measure);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--silicate-space-4);
+  padding-right: var(--silicate-space-4);
+}
+
+body > header,
+body > footer,
+body > nav {
+  padding-top: var(--silicate-space-5);
+  padding-bottom: var(--silicate-space-5);
+}
+
+main { padding-top: var(--silicate-space-4); padding-bottom: var(--silicate-space-7); }
+
+/* full-bleed escape hatch — apply to <figure> or <hr> when needed */
+figure[data-bleed],
+hr[data-bleed] {
+  max-width: none;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* ==========================================================================
+   prose — headings, paragraphs, lists
+   ========================================================================== */
+
 h1, h2, h3, h4, h5, h6 {
-  margin: var(--silicate-space-6) 0 var(--silicate-space-3);
-  line-height: 1.25;
+  font-family: var(--silicate-font-body);
   font-weight: 600;
+  line-height: var(--silicate-leading-tight);
+  text-wrap: balance;
+  margin: var(--silicate-space-6) 0 var(--silicate-space-3);
 }
-h1 { font-size: 2rem; }
-h2 { font-size: 1.5rem; }
+
+h1 { font-size: 2.25rem; letter-spacing: -0.01em; }
+h2 { font-size: 1.625rem; }
 h3 { font-size: 1.25rem; }
-h4 { font-size: 1.125rem; }
-h5 { font-size: 1rem; color: var(--silicate-muted); }
-h6 { font-size: 1rem; color: var(--silicate-muted); font-weight: 400; }
+h4 { font-size: 1.0625rem; }
+h5 { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--silicate-fg-muted); }
+h6 { font-size: 0.9375rem; color: var(--silicate-fg-muted); }
 
-/* Block flow */
-p, ul, ol, dl, pre, blockquote, figure, table, hr, fieldset {
-  margin: 0 0 var(--silicate-space-4);
-}
-ul, ol { padding-left: var(--silicate-space-5); }
-li + li, li > ul, li > ol { margin-top: var(--silicate-space-2); }
+h1 + p, h2 + p, h3 + p { margin-top: 0; }
+
+p { margin: 0 0 var(--silicate-space-3); }
+
+ul, ol { margin: 0 0 var(--silicate-space-3); padding-left: var(--silicate-space-4); }
+li { margin-bottom: var(--silicate-space-1); }
+li > ul, li > ol { margin: var(--silicate-space-1) 0 0; }
+
+dl { margin: 0 0 var(--silicate-space-3); }
 dt { font-weight: 600; }
-dd { margin: 0 0 var(--silicate-space-3); }
+dd { margin: 0 0 var(--silicate-space-2) var(--silicate-space-4); color: var(--silicate-fg-muted); }
 
-/* Links */
+blockquote {
+  margin: var(--silicate-space-4) 0;
+  padding-left: var(--silicate-space-3);
+  border-left: var(--silicate-rule-width) solid var(--silicate-rule);
+  color: var(--silicate-fg-muted);
+  font-style: italic;
+}
+blockquote > :last-child { margin-bottom: 0; }
+blockquote cite { display: block; margin-top: var(--silicate-space-2); font-style: normal; font-size: 0.9rem; }
+blockquote cite::before { content: "— "; }
+
+/* ==========================================================================
+   inline
+   ========================================================================== */
+
 a {
   color: var(--silicate-accent);
   text-decoration: underline;
-  text-underline-offset: 0.15em;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
 }
-a:visited { color: var(--silicate-accent-visited); }
 a:hover { text-decoration-thickness: 2px; }
-a:focus-visible { outline: 2px solid var(--silicate-accent); outline-offset: 2px; }
+a:visited { color: var(--silicate-accent); }
 
-/* Inline */
 strong, b { font-weight: 600; }
 em, i { font-style: italic; }
-small { font-size: 0.875em; color: var(--silicate-muted); }
-mark { background: var(--silicate-selection); color: var(--silicate-fg); padding: 0 0.15em; }
+small { font-size: 0.85em; color: var(--silicate-fg-muted); }
+mark { background: var(--silicate-mark); color: inherit; padding: 0 0.15em; }
 abbr[title] { text-decoration: underline dotted; cursor: help; }
 kbd {
   font-family: var(--silicate-font-mono);
-  font-size: 0.875em;
+  font-size: 0.85em;
   padding: 0.1em 0.35em;
-  background: var(--silicate-surface);
-  border: 1px solid var(--silicate-rule);
+  border: var(--silicate-rule-width) solid var(--silicate-rule);
   border-bottom-width: 2px;
-  border-radius: 3px;
+  background: var(--silicate-bg);
 }
 
-/* Code */
-code, samp, pre {
+/* ==========================================================================
+   code
+   ========================================================================== */
+
+code, pre, samp {
   font-family: var(--silicate-font-mono);
-  font-size: 0.9375em;
+  font-size: 0.9em;
 }
-code, samp {
-  background: var(--silicate-surface);
+
+code {
+  background: var(--silicate-code-bg);
   padding: 0.1em 0.35em;
-  border-radius: 3px;
 }
+
 pre {
-  padding: var(--silicate-space-4);
-  background: var(--silicate-surface);
-  border-radius: 4px;
+  background: var(--silicate-code-bg);
+  padding: var(--silicate-space-3);
   overflow-x: auto;
-  line-height: 1.45;
+  line-height: 1.5;
+  margin: 0 0 var(--silicate-space-3);
 }
-pre code, pre samp { background: none; padding: 0; }
+pre code { background: none; padding: 0; font-size: 1em; }
 
-/* Quote */
-blockquote {
-  margin-left: 0;
-  padding: var(--silicate-space-2) var(--silicate-space-4);
-  border-left: 3px solid var(--silicate-rule);
-  color: var(--silicate-muted);
-}
-blockquote > :last-child { margin-bottom: 0; }
+/* ==========================================================================
+   media
+   ========================================================================== */
 
-/* Rule */
-hr {
-  border: 0;
-  border-top: 1px solid var(--silicate-rule);
-}
+img, video, svg { max-width: 100%; height: auto; display: block; }
 
-/* Media */
-img, video, svg { max-width: 100%; height: auto; }
-figure { margin: var(--silicate-space-5) 0; }
+figure { margin: var(--silicate-space-4) 0; }
 figcaption {
-  font-size: 0.875em;
-  color: var(--silicate-muted);
   margin-top: var(--silicate-space-2);
+  font-size: 0.9rem;
+  color: var(--silicate-fg-muted);
+  text-align: left;
 }
 
-/* Tables */
-table { width: 100%; border-collapse: collapse; }
+/* ==========================================================================
+   tables
+   ========================================================================== */
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: var(--silicate-space-3) 0;
+  font-size: 0.95em;
+}
 caption {
+  caption-side: bottom;
+  margin-top: var(--silicate-space-2);
+  color: var(--silicate-fg-muted);
+  font-size: 0.9rem;
   text-align: left;
-  font-style: italic;
-  color: var(--silicate-muted);
-  padding-bottom: var(--silicate-space-2);
 }
 th, td {
   text-align: left;
-  padding: var(--silicate-space-2) var(--silicate-space-3);
-  border-bottom: 1px solid var(--silicate-rule);
+  padding: var(--silicate-space-2) var(--silicate-space-3) var(--silicate-space-2) 0;
+  border-bottom: var(--silicate-rule-width) solid var(--silicate-rule);
+  vertical-align: top;
 }
 th { font-weight: 600; }
+thead th { border-bottom-width: 2px; }
 
-/* Forms */
-fieldset {
-  padding: var(--silicate-space-4);
-  border: 1px solid var(--silicate-rule);
-  border-radius: 4px;
-}
-legend { padding: 0 var(--silicate-space-2); font-weight: 600; }
-label { display: block; margin-bottom: var(--silicate-space-1); font-weight: 600; }
+/* ==========================================================================
+   forms — keep native, fix the obvious
+   ========================================================================== */
 
-input, select, textarea {
+label { display: block; margin-bottom: var(--silicate-space-1); font-weight: 500; }
+label + small { display: block; margin-bottom: var(--silicate-space-2); color: var(--silicate-fg-muted); }
+
+input, textarea, select, button {
   font: inherit;
   color: inherit;
-  width: 100%;
-  padding: var(--silicate-space-2) var(--silicate-space-3);
-  margin-bottom: var(--silicate-space-3);
-  background: var(--silicate-bg);
-  border: 1px solid var(--silicate-rule);
-  border-radius: 4px;
-}
-textarea { min-height: 6rem; resize: vertical; }
-input[type="checkbox"], input[type="radio"] {
-  width: auto;
-  margin-right: var(--silicate-space-2);
-  margin-bottom: 0;
-  vertical-align: middle;
 }
 
-input:focus-visible, select:focus-visible,
-textarea:focus-visible, button:focus-visible {
-  outline: 2px solid var(--silicate-accent);
-  outline-offset: 1px;
+input[type="text"], input[type="email"], input[type="password"],
+input[type="search"], input[type="url"], input[type="tel"],
+input[type="number"], input[type="date"], textarea, select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: var(--silicate-rule-width) solid var(--silicate-rule);
+  padding: var(--silicate-space-2) 0;
+  margin-bottom: var(--silicate-space-3);
+  border-radius: 0;
 }
+input[type="text"]:focus, input[type="email"]:focus, input[type="password"]:focus,
+input[type="search"]:focus, input[type="url"]:focus, input[type="tel"]:focus,
+input[type="number"]:focus, input[type="date"]:focus, textarea:focus, select:focus {
+  outline: none;
+  border-bottom-color: var(--silicate-accent);
+  border-bottom-width: 2px;
+}
+
+textarea { min-height: 6em; resize: vertical; }
 
 button, input[type="submit"], input[type="button"], input[type="reset"] {
-  font: inherit;
-  width: auto;
+  background: transparent;
+  color: var(--silicate-fg);
+  border: var(--silicate-rule-width) solid currentColor;
   padding: var(--silicate-space-2) var(--silicate-space-4);
+  cursor: pointer;
+  border-radius: 0;
+}
+button:hover, input[type="submit"]:hover {
   background: var(--silicate-fg);
   color: var(--silicate-bg);
-  border: 1px solid var(--silicate-fg);
-  border-radius: 4px;
-  cursor: pointer;
 }
-button:hover, input[type="submit"]:hover { opacity: 0.85; }
 button[disabled] { opacity: 0.5; cursor: not-allowed; }
 
-/* Detail / summary */
-details {
-  padding: var(--silicate-space-3) var(--silicate-space-4);
-  border: 1px solid var(--silicate-rule);
-  border-radius: 4px;
-  margin-bottom: var(--silicate-space-4);
+/* primary-ish: a <button type="submit"> — fg-filled by default, accent on hover */
+button[type="submit"], input[type="submit"] {
+  background: var(--silicate-fg);
+  border-color: var(--silicate-fg);
+  color: var(--silicate-bg);
 }
-details[open] summary { margin-bottom: var(--silicate-space-3); }
-summary { font-weight: 600; cursor: pointer; }
+button[type="submit"]:hover, input[type="submit"]:hover {
+  background: var(--silicate-accent);
+  border-color: var(--silicate-accent);
+  color: var(--silicate-accent-on);
+}
 
-/* Print */
+fieldset {
+  border: none;
+  border-top: var(--silicate-rule-width) solid var(--silicate-rule);
+  padding: var(--silicate-space-3) 0 0;
+  margin: var(--silicate-space-4) 0;
+}
+legend { font-weight: 600; padding-right: var(--silicate-space-2); }
+
+/* ==========================================================================
+   structure: rules, details, hr
+   ========================================================================== */
+
+hr {
+  border: none;
+  border-top: var(--silicate-rule-width) solid var(--silicate-rule);
+  margin: var(--silicate-space-5) 0;
+}
+
+details {
+  border-top: var(--silicate-rule-width) solid var(--silicate-rule);
+  padding: var(--silicate-space-3) 0;
+}
+details + details { border-top: none; }
+details:last-of-type { border-bottom: var(--silicate-rule-width) solid var(--silicate-rule); }
+summary { cursor: pointer; font-weight: 600; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "+ "; color: var(--silicate-fg-muted); }
+details[open] > summary::before { content: "− "; }
+details > :not(summary) { margin-top: var(--silicate-space-2); }
+
+/* ==========================================================================
+   focus — single accent ring
+   ========================================================================== */
+
+:focus-visible {
+  outline: var(--silicate-focus-ring) solid var(--silicate-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   article header niceties (optional — uses semantics, not classes)
+   ========================================================================== */
+
+article > header time { color: var(--silicate-fg-muted); font-size: 0.95rem; }
+article > header h1 { margin-top: var(--silicate-space-3); }
+
+/* selection */
+::selection { background: var(--silicate-accent); color: var(--silicate-accent-on); }
+
+/* print */
 @media print {
-  body { max-width: none; color: #000; background: #fff; padding: 0; }
-  a { color: #000; }
-  pre, code, kbd { background: #f4f4f4; }
+  :root { --silicate-bg: #fff; --silicate-fg: #000; --silicate-rule: #888; }
+  a { color: inherit; text-decoration: underline; }
 }

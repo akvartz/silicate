@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=700, initial-scale=1">
+<title>Silicate · type · families</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  body { margin:0; padding: 22px 28px; background:#fbf1c7; color:#3c3836; }
+  .row { display: grid; grid-template-columns: 80px 1fr; align-items: baseline; gap: 16px; padding: 12px 0; border-top: 1px solid #d5c4a1; }
+  .row:first-child { border-top: none; }
+  .tag { font-family: var(--silicate-font-mono); font-size: 11px; color:#665c54; text-transform: uppercase; letter-spacing: 0.06em; }
+  .specimen { font-size: 22px; line-height: 1.2; }
+  .stack { font-family: var(--silicate-font-mono); font-size: 10px; color:#928374; margin-top: 4px; }
+  .serif { font-family: var(--silicate-font-serif); }
+  .sans  { font-family: var(--silicate-font-sans); }
+  .mono  { font-family: var(--silicate-font-mono); }
+</style>
+</head>
+<body>
+  <div class="row">
+    <div class="tag">Body</div>
+    <div>
+      <div class="specimen serif">A well-set book page, not a landing page.</div>
+      <div class="stack">Iowan Old Style → Palatino → Book Antiqua → Georgia → serif</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="tag">UI</div>
+    <div>
+      <div class="specimen sans">For app surfaces built on top.</div>
+      <div class="stack">-apple-system → Segoe UI → Roboto → Helvetica → sans-serif</div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="tag">Mono</div>
+    <div>
+      <div class="specimen mono">--silicate-accent: #af3a03;</div>
+      <div class="stack">ui-monospace → SF Mono → Menlo → Consolas → monospace</div>
+    </div>
+  </div>
+</body>
+</html>
